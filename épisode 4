@@ -1,0 +1,20 @@
+LocalScript ReplicatedFrist :
+script.Parent:RemoveDefaultLoadingScreen()
+ --
+ Script Workspace :
+ game.Players.PlayerAdded:connect(function(player)
+ local gui = game.ReplicatedStorage:WaitForChild("ScreenGui"):Clone()
+ gui.Parent = player.PlayerGui
+ gui.Script.Disabled = false
+end)
+ --
+ Script ScreenGui :
+ local contentprovider = game.ContentProvider
+ 
+while wait() do 
+ if contentprovider.RequestQueueSize == 0 then
+  script.Parent.Frame:TweenPosition(UDim2.new(0,0,-1,0),"In","Quart",1)
+  wait(1)
+  script.Parent:Destroy()
+ end
+end
